@@ -1,5 +1,6 @@
 package com.project.backend.controller;
 
+import com.project.backend.exception.EmployeeNotFoundException;
 import com.project.backend.model.dao.Employee;
 import com.project.backend.model.dto.EmployeeRepository;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,6 @@ class EmployeeController {
 
     @GetMapping("/employees/{id}")
     Employee one(@PathVariable Long id) {
-
         return repository.findById(id)
                 .orElseThrow(() -> new EmployeeNotFoundException(id));
     }
