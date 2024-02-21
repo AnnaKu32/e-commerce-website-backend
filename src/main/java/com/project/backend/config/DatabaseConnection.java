@@ -17,7 +17,6 @@ class DatabaseConnection{
 
     @Bean
     CommandLineRunner initDatabase(UserRepository repository) {
-
         return args -> {
             log.info("Preloading " + repository.save(new User("Bilbo",  "Baggins", "email.com","@jei")));
             log.info("Preloading " + repository.save(new User("Frodo",  "Baggins", "email.com", "fdjhdh")));
