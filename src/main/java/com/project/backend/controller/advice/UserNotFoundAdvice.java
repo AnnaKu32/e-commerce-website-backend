@@ -1,4 +1,4 @@
-package com.project.backend.controller;
+package com.project.backend.controller.advice;
 
 import com.project.backend.exception.UserNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-class UserNotFoundAdvice {
+public class UserNotFoundAdvice {
 
     @ResponseBody
     @ExceptionHandler(UserNotFoundException.class)

@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-class UserController {
+@RequestMapping("/users")
+public class UserController {
 
     private final UserRepository repository;
 
@@ -32,12 +33,13 @@ class UserController {
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
-    @PutMapping("/employees/{id}")
+    @PutMapping("/users/{id}")
     User replaceUser(@RequestBody User newUser, @PathVariable Long id) {
         return repository.findById(id)
                 .map(employee -> {
                     employee.setFirstName(newUser.getFirstName());
                     employee.setLastName(newUser.getLastName());
+                    employee.setEmail(newUser.getUsername());
                     employee.setEmail(newUser.getEmail());
                     employee.setPassword(newUser.getPassword());
                     return repository.save(employee);
