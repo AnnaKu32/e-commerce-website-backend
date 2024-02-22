@@ -2,7 +2,7 @@ package com.project.backend.controller;
 
 import com.project.backend.exception.UserNotFoundException;
 import com.project.backend.model.dao.User;
-import com.project.backend.model.dto.UserRepository;
+import com.project.backend.model.repository.UserRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

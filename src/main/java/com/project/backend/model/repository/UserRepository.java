@@ -1,4 +1,4 @@
-package com.project.backend.model.dto;
+package com.project.backend.model.repository;
 
 import com.project.backend.model.dao.User;
 import org.springframework.data.jpa.repository.JpaRepository;

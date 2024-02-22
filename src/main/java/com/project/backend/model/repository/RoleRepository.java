@@ -1,4 +1,4 @@
-package com.project.backend.model.dto;
+package com.project.backend.model.repository;
 
 import com.project.backend.constans.ERole;
 import com.project.backend.model.dao.Role;
