@@ -1,4 +1,4 @@
-package com.project.backend.security.service;
+package com.project.backend.security.service.impl;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.backend.model.dao.User;
