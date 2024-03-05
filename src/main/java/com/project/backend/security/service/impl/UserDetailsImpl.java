@@ -30,9 +30,7 @@ public class UserDetailsImpl implements UserDetails {
     @JsonIgnore
     private String password;
 
-    // GrantedAuthority - it represents a single permission or role that a user has.
-    // The ? extends GrantedAuthority - bounded wildcard in Java generics. It means that the collection can contain
-    // objects of any class that extends GrantedAuthority or implements it (since GrantedAuthority is an interface).
+
     private Collection<? extends GrantedAuthority> authorities;
 
     public UserDetailsImpl(Long id, String firstName, String lastName, String email, String username, String password,
