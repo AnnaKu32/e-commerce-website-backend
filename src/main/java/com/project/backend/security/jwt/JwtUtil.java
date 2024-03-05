@@ -40,9 +40,6 @@ public class JwtUtil {
                 .getSubject();
     }
 
-    public boolean validateJwtToken(String authToken) {
-        authToken.
-    }
-
+    public boolean validateJwtToken(String authToken) {}
 
 }

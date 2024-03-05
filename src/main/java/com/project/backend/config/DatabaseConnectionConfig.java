@@ -18,8 +18,8 @@ class DatabaseConnectionConfig {
     @Bean
     CommandLineRunner initDatabase(UserRepository repository) {
         return args -> {
-            LOGGER.info("Preloading " + repository.save(new User("Bilbo",  "Baggins", "email.com","@jei")));
-            LOGGER.info("Preloading " + repository.save(new User("Frodo",  "Baggins", "email.com", "fdjhdh")));
+//            LOGGER.info("Preloading " + repository.save(new User("John",  "Smith", "email.com","@jei")));
+//            LOGGER.info("Preloading " + repository.save(new User("Thomas",  "Smith", "email.com", "fdjhdh")));
         };
     }
 }
