@@ -23,7 +23,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    User newEmployee(@RequestBody User newUser) {
+    User newUser(@RequestBody User newUser) {
         return repository.save(newUser);
     }
 

@@ -14,13 +14,13 @@ public class AuthController {
         this.repository = repository;
     }
 
-    @PostMapping("/signup")
-    User logiNUser(@RequestBody User newUser) {
+    @PostMapping("/login")
+    User loginUser(@RequestBody User newUser) {
         return repository.save(newUser);
     }
 
-    @PostMapping("/signin")
-    User newEmployee(@RequestBody User newUser) {
+    @PostMapping("/signup")
+    User registerUser(@RequestBody User newUser) {
         return repository.save(newUser);
     }
 
