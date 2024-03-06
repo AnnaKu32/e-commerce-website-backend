@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
+import io.jsonwebtoken.Claims;
 
 import java.util.Date;
 
@@ -22,7 +23,6 @@ public class JwtUtil {
     private int jwtExpirationMs;
 
     public String generateToken(Authentication authentication) {
-
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
 
         return Jwts.builder()
@@ -40,8 +40,16 @@ public class JwtUtil {
                 .getSubject();
     }
 
-    public boolean validateJwtToken(String authToken) {
 
+    public boolean validateJwtToken(String authToken, String expectedUsername) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(jwtSecret)
+                .parseClaimsJws(authToken)
+                .getBody();
+
+        String extractedUsername = extractUsername(authToken);
+        return extractedUsername.equals(expectedUsername)
+                && claims.getExpiration().after(new Date());
     }
 
 }
