@@ -8,13 +8,21 @@ import org.springframework.http.HttpStatus;
 @Setter
 public class MessageResponse {
 
+    private long id;
+
+    private String username;
+
+    private String email;
+
     private HttpStatus httpStatus;
 
     private String message;
 
-    public MessageResponse(HttpStatus httpStatus, String message) {
+    public MessageResponse(long id, String username, String email, HttpStatus httpStatus, String message) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
         this.httpStatus = httpStatus;
         this.message = message;
     }
-
 }

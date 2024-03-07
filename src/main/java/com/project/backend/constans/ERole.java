@@ -1,6 +1,6 @@
 package com.project.backend.constans;
 
 public enum ERole {
-    USER,
-    ADMIN
+    ROLE_USER,
+    ROLE_ADMIN
 }
