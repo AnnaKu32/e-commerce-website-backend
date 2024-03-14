@@ -1,7 +1,6 @@
 package com.project.backend.controller;
 
 import com.project.backend.constans.ERole;
-import com.project.backend.exception.UserAlreadyExistException;
 import com.project.backend.model.dao.Role;
 import com.project.backend.model.dao.User;
 import com.project.backend.model.repository.RoleRepository;
@@ -9,7 +8,6 @@ import com.project.backend.model.repository.UserRepository;
 import com.project.backend.payload.request.LoginRequest;
 import com.project.backend.payload.request.SignupRequest;
 import com.project.backend.payload.response.ErrorResponse;
-import com.project.backend.payload.response.JwtResponse;
 import com.project.backend.payload.response.MessageResponse;
 import com.project.backend.security.jwt.JwtUtil;
 import com.project.backend.security.service.impl.UserDetailsImpl;
@@ -21,15 +19,13 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/auth")
@@ -61,7 +57,7 @@ public class AuthController {
 
             String jwt = jwtUtils.generateToken((Authentication) userDetails);
 
-            return ResponseEntity.ok(new MessageResponse(
+            return ResponseEntity.ok(new MessageResponse(jwt,
                     userDetails.getId(),
                     userDetails.getUsername(),
                     userDetails.getEmail(),
@@ -90,28 +86,11 @@ public class AuthController {
 
         User user = new User(signupRequest.getFirstName(), signupRequest.getLastName(), signupRequest.getEmail(),
                 signupRequest.getUsername(), encoder.encode(signupRequest.getPassword()));
-        Set<String> strRoles = signupRequest.getRoles();
-        Set<Role> roles = new HashSet<>();
 
-        if (strRoles == null) {
-            Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            roles.add(userRole);
-        } else {
-            strRoles.forEach(role -> {
-                if ("admin".equals(role)) {
-                    Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                            .orElseThrow(() -> new RuntimeException("Error: Admin role is not found."));
-                    roles.add(adminRole);
-                } else {
-                    Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                            .orElseThrow(() -> new RuntimeException("Error: User role is not found."));
-                    roles.add(userRole);
-                }
-            });
-        }
+        Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+        user.setRoles(Collections.singleton(userRole));
 
-        user.setRoles(roles);
         userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse(
@@ -121,6 +100,5 @@ public class AuthController {
                 HttpStatus.CREATED,
                 "User registered successfully"));
     }
-}
 
 }
