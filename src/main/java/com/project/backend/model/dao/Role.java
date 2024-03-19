@@ -1,10 +1,9 @@
 package com.project.backend.model.dao;
 
-
+import com.project.backend.constans.ERole;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.persistence.*;
 
 @Getter
 @Setter
@@ -18,12 +17,12 @@ public class Role {
 
     @Enumerated(EnumType.STRING)
     @Column(length = 50)
-    private String name;
+    private ERole name;
 
     public Role() {
     }
 
-    public Role(String name) {
+    public Role(ERole name) {
         this.name = name;
     }
 }

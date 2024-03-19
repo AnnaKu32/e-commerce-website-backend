@@ -33,10 +33,12 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((authz) -> authz
-                        .anyRequest().authenticated()
-                )
-                .httpBasic(withDefaults());
+        http.csrf().disable()
+                .authorizeRequests()
+//                .antMatchers("/auth/*", "/register").permitAll()
+                .anyRequest().authenticated()
+                .and();
+
         return http.build();
     }
 }
