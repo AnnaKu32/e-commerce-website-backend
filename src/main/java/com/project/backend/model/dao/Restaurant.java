@@ -15,19 +15,23 @@ public class Restaurant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
     @Column(length = 50)
     private String name;
 
-    //adresss
-    //cordinates
-    //type od restuarnt like hashtag?
+    @Column(length = 255)
+    private String address;
+
+    private Double latitude;
+    private Double longitude;
 
     public Restaurant() {
     }
 
-    public Restaurant(ERole name) {
+    public Restaurant(String name, String address, Double latitude, Double longitude) {
         this.name = name;
+        this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 }
 
