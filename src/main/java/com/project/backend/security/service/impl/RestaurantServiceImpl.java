@@ -15,7 +15,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     private RestaurantRepository restaurantRepository;
 
     @Autowired
-    private GeocodingService geocodingService;
+    private GeocodingServiceImpl geocodingService;
 
     @Override
     public List<Restaurant> findRestaurantsByAddress(String address) {
