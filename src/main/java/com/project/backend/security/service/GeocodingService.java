@@ -1,7 +1,8 @@
 package com.project.backend.security.service;
 
-import org.springframework.stereotype.Service;
+import com.project.backend.model.dao.Coordinates;
 
+public interface GeocodingService {
 
-public class GeocodingService {
+    public Coordinates geocode(String address);
 }
